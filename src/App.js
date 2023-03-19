@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useFetch } from './hooks/useFetch';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useHover } from './hooks/useHover';
+import { useViewportSize } from './hooks/useViewportSize';
 import './App.css';
 import { useUpdateEffect } from './hooks/useUpdateEffect';
 
@@ -23,6 +24,8 @@ function App() {
   const [token, { setItem, removeItem }] = useLocalStorage('token');
 
   const { hovered, ref } = useHover();
+
+  const { height, width } = useViewportSize();
 
   console.log('RENDER');
   console.log('ref', ref);
@@ -63,6 +66,9 @@ function App() {
     </div>
     <div ref={ref}>
       {hovered ? 'На меня навели мышку' : 'Наведи мышкой на меня'}
+    </div>
+    <div>
+      Width: {width}, height: {height}
     </div>
     </div>
   );
