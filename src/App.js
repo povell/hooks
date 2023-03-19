@@ -3,6 +3,7 @@ import { useState } from 'react';
 // import { useTimeout } from './hooks/useTimeout';
 // import { useDebounce } from './hooks/useDebounce';
 import { useFetch } from './hooks/useFetch';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import './App.css';
 import { useUpdateEffect } from './hooks/useUpdateEffect';
 
@@ -18,6 +19,7 @@ function App() {
   useUpdateEffect(() => {
     alert(count);
   }, [count]);
+  const [token, { setItem, removeItem }] = useLocalStorage('token');
 
   return (
     <div className="App">
@@ -39,6 +41,19 @@ function App() {
         {error && 'Произошла ошибка'}
         {data && !isLoading && data.map(item => <div key={item.id}>{item.title}</div>) }
       </div>
+      <div>
+      <p>
+        Твой токен: { token }
+      </p>
+      <div>
+        <button onClick={() => setItem('new-token')}>
+          Задать токен
+        </button>
+        <button onClick={() => removeItem()}>
+          Удалить токен
+        </button>
+      </div>
+    </div>
     </div>
   );
 }
