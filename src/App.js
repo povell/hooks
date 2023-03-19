@@ -4,6 +4,7 @@ import { useState } from 'react';
 // import { useDebounce } from './hooks/useDebounce';
 import { useFetch } from './hooks/useFetch';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { useHover } from './hooks/useHover';
 import './App.css';
 import { useUpdateEffect } from './hooks/useUpdateEffect';
 
@@ -20,6 +21,12 @@ function App() {
     alert(count);
   }, [count]);
   const [token, { setItem, removeItem }] = useLocalStorage('token');
+
+  const { hovered, ref } = useHover();
+
+  console.log('RENDER');
+  console.log('ref', ref);
+  console.log('hovered', hovered);
 
   return (
     <div className="App">
@@ -53,6 +60,9 @@ function App() {
           Удалить токен
         </button>
       </div>
+    </div>
+    <div ref={ref}>
+      {hovered ? 'На меня навели мышку' : 'Наведи мышкой на меня'}
     </div>
     </div>
   );
