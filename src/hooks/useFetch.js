@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function useFetch(url) {
   const [data, setData] = useState([]);
@@ -13,12 +13,19 @@ export function useFetch(url) {
   const refetch = async (options) => {
     reset();
 
+    let params= {};
     let prepareUrl = url;
 
     if (options && 'params' in options) {
-      for (let key in options.params) {
-        prepareUrl += `/?${key}=${options.params[key]}`;
+      params = options.params;
+    } else {
+      params = {
+        _limit: 3
       }
+    }
+
+    for (let key in params) {
+      prepareUrl += `/?${key}=${params[key]}`;
     }
     setIsLoading(true)
     try {
@@ -34,6 +41,10 @@ export function useFetch(url) {
     }
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    refetch();
+  }, [url]);
 
 
   return {

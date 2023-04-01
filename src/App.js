@@ -1,7 +1,4 @@
 import { useState } from 'react';
-// import { useToggle } from './hooks/useToggle';
-// import { useTimeout } from './hooks/useTimeout';
-// import { useDebounce } from './hooks/useDebounce';
 import { useFetch } from './hooks/useFetch';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useHover } from './hooks/useHover';
@@ -26,10 +23,6 @@ function App() {
   const { hovered, ref } = useHover();
 
   const { height, width } = useViewportSize();
-
-  console.log('RENDER');
-  console.log('ref', ref);
-  console.log('hovered', hovered);
 
   return (
     <div className="App">
